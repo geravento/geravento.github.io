@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Plataforma para visualização dinâmica de ativos de geração centralizada eólica no Brasil.">
+	<meta name="google-site-verification" content="3Cpl3ozutCq60xxQtbaWprLJN7LjnHjYHBF-gkZYO9Q" />
+	<title>Plataforma Livre de Geração Centralizada</title>
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+</head>
+<body>
+	<div class="controls">
+		<nav class="top-bar">
+			<div class="toggle multi-toggle" title="Tipo de geração." id="tech-toggle-ctrl">
+				<button value="EOL" class="active">EOL</button>
+				<button value="UFV">UFV</button>
+				<button value="UTN">UTN</button>
+				<button value="UHE">UHE</button>
+				<button value="CGH">CGH</button>
+				<button value="PCH">PCH</button>
+				<button value="UTE">UTE</button>
+			</div>
+			<div class="toggle" title="Nível de visualização." id="level-toggle-ctrl">
+				<button value="point" class="active">Usina</button>
+				<button value="state">Estado</button>
+				<button value="subsystem">Subsistema</button>
+			 </div>
+		</nav>
+		<div class="left-menu">
+			<div class="content">
+				<div id="power-plant-info">
+					<p style="text-transform: uppercase;"></p>
+					<h1></h1>
+					<ul>
+						<li id="coords" title="Coordenadas globais."><i class="fa-solid fa-map-marker"></i><span></span></li>
+						<li id="ceg" title="Código CEG do ativo."><i class="fa-solid fa-hashtag"></i><span></span></li>
+						<li id="capacity" title="Capacidade instalada."><i class="fa-solid fa-bolt-lightning"></i><span></span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="right">
+				<nav class="menu">
+					<ul>
+						<li id="toggle-left-menu"><i class="fa-solid fa-bars"></i></li>
+					</ul>
+				</nav>
+				<div id="overview"></div>
+			</div>
+		</div>
+		<nav class="status-bar"></nav>
+	</div>
+	<div id="map"></div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/24c1955c0e.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<script type="module" src="js/main.js"></script>
+</body>
+</html>
