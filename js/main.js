@@ -5,6 +5,15 @@ const TECHS = ['EOL', 'UFV', 'UTN', 'UHE', 'CGH', 'PCH', 'UTE']
 const LEVELS = ['subsystem', 'state', 'point']
 const STATES = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO']
 const SUBSYSTEMS = ['N', 'NE', 'SE', 'S']
+const TECH_COLORS = {
+	'EOL': 'gray',
+	'UFV': 'orange',
+	'UTN': 'limegreen',
+	'UHE': 'dogerblue',
+	'CGH': 'blue',
+	'PCH': 'lightblue',
+	'UTE': 'red'
+}
 
 const DICT = {
 	'EOL': 'Eólica',
@@ -73,9 +82,12 @@ const formatCoords = point => `${Math.abs(point.lat).toFixed(1)}° ${point.lat >
 
 class Platform {
 
-	constructor(level, techs) {
-		this.level = level;
-		this.techs = techs;
+	constructor() {
+		this.techs = ['EOL', 'UFV'];
+
+		this.level = 'subsystem';
+
+		this.showPoints = true;
 		this.points = {};
 	}
 
@@ -96,24 +108,59 @@ class Platform {
 	}
 
 	loadPoints() {
+		this.tech_capacity = {};
+		for (let tech of this.techs) this.tech_capacity[tech] = 0;
+
 		this.techs.forEach(tech => {
+			let capacity = 0;
+
 			fetch(`data/points/${tech}.json`)
 			.then((response) => response.json())
 			.then((points) => {
 				points.forEach(point => {
 					this.points[point.ceg] = point;
+					capacity += point.capacity;
 
-					L.marker([point.lat, point.lon], {icon: powerPlantIcons[tech]})
-					.addTo(this.map)
-					.on('click', () => this.openPowerPlantInfo(tech, point.ceg))
-					.bindPopup(`
-						<h2>${point.name} (${point.state})</h2>
-						<ul>
-							<li><i class="fa-solid fa-map-marker"></i>${formatCoords(point)}</li>
-							<li><i class="fa-solid fa-bolt-lightning"></i>${(point.capacity / 1000).toFixed(1)} MW</li>
-							<li><i class="fa-solid fa-magnifying-glass"></i>SIGA (ANEEL)</li>
-						</ul>`
-					);
+					if (this.showPoints) {
+						L.marker([point.lat, point.lon], {icon: powerPlantIcons[tech]})
+						.addTo(this.map)
+						.on('click', () => this.openPowerPlantInfo(tech, point.ceg))
+						.bindPopup(`
+							<h2>${point.name} (${point.state})</h2>
+							<ul>
+								<li><i class="fa-solid fa-map-marker"></i>${formatCoords(point)}</li>
+								<li><i class="fa-solid fa-bolt-lightning"></i>${(point.capacity / 1000).toFixed(1)} MW</li>
+								<li><i class="fa-solid fa-magnifying-glass"></i>SIGA (ANEEL)</li>
+							</ul>`
+						);
+					}
+				});
+			})
+			.then(() => {
+				this.tech_capacity[tech] = (capacity / 1E6).toFixed(1);
+
+				let total = 0;
+				for (let tech of this.techs) total += parseFloat(this.tech_capacity[tech]);
+
+				$('div#overview span b').text(`${total.toFixed(1)} GWh`);
+
+				const data = [{
+					values: Object.values(this.tech_capacity),
+					labels: Object.keys(this.tech_capacity),
+					marker: {
+						colors: Object.keys(this.tech_capacity).map(tech => TECH_COLORS[tech]),
+					},
+					type: 'pie',
+					textinfo: 'value',
+					unit: 'GWh',
+					hole: 0.4,
+				}];
+		
+				Plotly.newPlot('overview-pie', data, {
+					height: 100,
+					margin: {
+						t: 20, b: 20, l: 0, r: 0
+					},
 				});
 			})
 			.catch((error) => console.error('Error fetching or parsing the data:', error));
@@ -179,7 +226,8 @@ class Platform {
 	}
 
 	loadInfo() {
-		if (this.level == 'point') this.loadPoints();
+		this.loadPoints();
+
 		if (this.level == 'state') this.loadStates();
 		if (this.level == 'subsystem') this.loadSubsystems();
 	}
@@ -197,6 +245,18 @@ class Platform {
 		$('div.left-menu div.content').show();
 	}
 
+	clearMarkers() {
+		this.map.eachLayer(function(layer) {
+			if (layer instanceof L.Marker) layer.remove();
+		});
+	}
+
+	clearShapes() {
+		this.map.eachLayer(function(layer) {
+			if (layer instanceof L.LayerGroup) layer.remove();
+		});
+	}
+
 	clearMap() {
 		this.points = {};
 		this.map.eachLayer(function(layer) {
@@ -206,26 +266,33 @@ class Platform {
 	}
 }
 
-const platform = new Platform('point', ['EOL'])
+const platform = new Platform()
 
 window.onload = function() {
 	platform.loadMap();
 	platform.loadInfo();
 }
 
+$('div#points-toggle-ctrl button').click(function(e) {
+	platform.showPoints = !platform.showPoints;
+
+	platform.clearMarkers();
+	if (platform.showPoints) platform.loadPoints();
+
+	$(this).toggleClass('active');
+});
+
 $('div#level-toggle-ctrl button').click(function(e) {
 	let level = $(this).val();
+	if (level == platform.level) level = '';
 
-	if (level != platform.level) {
-		platform.clearMap();
-		platform.setLevel(level);
-		platform.loadInfo(level);
+	platform.setLevel(level);
+	platform.clearShapes();
+	if (level == 'state') platform.loadStates();
+	if (level == 'subsystem') platform.loadSubsystems();
 
-		console.log('Changed level to', level);
-		
-		$('div#level-toggle-ctrl button').removeClass('active');
-		$(this).addClass('active');
-	}
+	$('div#level-toggle-ctrl button').removeClass('active');
+	if (level != '') $(this).addClass('active');
 });
 
 $('div#tech-toggle-ctrl button').click(function(e) {
@@ -244,6 +311,36 @@ $('div#tech-toggle-ctrl button').click(function(e) {
 });
 
 
-$('li#toggle-left-menu').click(() => {
-	$('div.left-menu div.content').slideToggle();
+$('li#left-menu-toggle-ctrl').click(() => {
+	$('div.controls div.middle-bar div.left-panel').slideToggle('linear');
 });
+
+$('div#select-view').on('click', () => alert('asd'));
+
+
+
+
+fetch(`data/subsystems/series/ONS_202411.json`)
+.then((response) => response.json())
+.then((response) => {
+	Plotly.newPlot(
+		'select-plot',
+		[{
+			x: response['x'],
+			y: response['data']['SE']['UHE'],
+			name: 'UHE'
+		},{
+			x: response['x'],
+			y: response['data']['SE']['UTE'],
+			name: 'UTE'
+		},{
+			x: response['x'],
+			y: response['data']['SE']['UTN'],
+			name: 'UTN'
+		}],
+		{
+			yaxis: {title: {text: `Geração (${response['unit']})`}}
+		}
+	)
+})
+.catch((error) => console.error('Error fetching data:', error));
