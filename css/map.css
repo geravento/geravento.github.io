@@ -1,0 +1,27 @@
+/* Estilo dos mapas. */
+
+div#map {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 100;
+}
+
+.power-plant-icon {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 100%;
+}
+.power-plant-icon.eol {border: 1px solid white;}
+.power-plant-icon.ufv {border: 1px solid orange;}
+.power-plant-icon.utn {border: 1px solid green;}
+
+.leaflet-popup ul {list-style-type: none;}
+.leaflet-popup ul li {margin: 4px 0;}
+.leaflet-popup ul li > i {margin-right: 8px;}
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}

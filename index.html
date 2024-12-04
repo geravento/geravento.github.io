@@ -5,8 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Plataforma para visualização dinâmica de ativos de geração centralizada eólica no Brasil.">
 	<meta name="google-site-verification" content="3Cpl3ozutCq60xxQtbaWprLJN7LjnHjYHBF-gkZYO9Q" />
-	<title>Geração Centralizada | GeraVento</title>
+	<title>Geração Centralizada - GeraVento</title>
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/plot.css">
+	<link rel="stylesheet" href="css/map.css">
+	<link rel="stylesheet" href="css/ui.css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
@@ -22,8 +25,8 @@
 				<button value="UTE">UTE</button>
 			</div>
 			<div class="toggle" title="Camadas" id="level-toggle-ctrl">
-				<button value="subsystem" class="active">Subsistemas</button>
-				<button value="state">Estados</button>
+				<button value="subsystems" class="active">Subsistemas</button>
+				<button value="states">Estados</button>
 			 </div>
 			 <div class="toggle" title="Visualizar usinas individuais" id="points-toggle-ctrl">
 				<button value="point" class="active">Usinas</button>

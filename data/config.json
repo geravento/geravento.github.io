@@ -1,0 +1,76 @@
+{
+	"techs": {
+		"EOL": {
+			"name": "eólica",
+			"color": "gray",
+			"icon": "img/points/eol.png"
+		},
+		"UFV": {
+			"name": "solar",
+			"color": "orange",
+			"icon": "img/points/ufv.png"
+		},
+		"UTN": {
+			"name": "nuclear",
+			"color": "limegreen",
+			"icon": "img/points/utn.png"
+		},
+		"UHE": {
+			"name": "hidrelétrica",
+			"color": "blue",
+			"icon": "img/points/uhe.png"
+		},
+		"CGH": {
+			"name": "hidrelétrica",
+			"color": "cyan",
+			"icon": "img/points/uhe.png"
+		},
+		"PCH": {
+			"name": "hidrelétrica",
+			"color": "cyan",
+			"icon": "img/points/uhe.png"
+		},
+		"UTE": {
+			"name": "termelétrica",
+			"color": "red",
+			"icon": "img/points/ute.png"
+		}
+	},
+	"shapes": {
+		"states": {
+			"AC": "Acre",
+			"AL": "Alagoas",
+			"AP": "Amapá",
+			"AM": "Amazonas",
+			"BA": "Bahia",
+			"CE": "Ceará",
+			"DF": "Distrito Federal",
+			"ES": "Espírito Santo",
+			"GO": "Goiás",
+			"MA": "Maranhão",
+			"MT": "Mato Grosso",
+			"MS": "Mato Grosso do Sul",
+			"MG": "Minas Gerais",
+			"PA": "Pará",
+			"PB": "Paraíba",
+			"PR": "Paraná",
+			"PE": "Pernambuco",
+			"PI": "Piauí",
+			"RJ": "Rio de Janeiro",
+			"RN": "Rio Grande do Norte",
+			"RS": "Rio Grande do Sul",
+			"RO": "Rondônia",
+			"RR": "Roraima",
+			"SC": "Santa Catarina",
+			"SP": "São Paulo",
+			"SE": "Sergipe",
+			"TO": "Tocantins"
+		},
+		"subsystems": {
+			"N": "Norte",
+			"NE": "Nordeste",
+			"SE": "Sudeste",
+			"S": "Sul"
+		}
+	}
+}
