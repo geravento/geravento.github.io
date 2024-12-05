@@ -64,16 +64,13 @@ div.controls div.middle-bar div.left-panel div.container > div {
 }
 
 div.controls div.middle-bar div.main-panel {
+	display: none;
 	width: 100%;
 	padding: 0 20px 20px 0;
 }
 
 div.controls div.middle-bar div.main-panel div.panel {
 	padding: 40px;
-}
-
-div.controls div.middle-bar div.main-panel > div {
-	display: none;
 }
 
 div.controls nav.bottom-bar {
@@ -125,6 +122,11 @@ div.controls div.toggle button:hover {
 div.controls div.toggle button.active {
 	background-color: white;
 	color: black;
+}
+
+div.controls div.toggle button.inactive {
+	color: grey;
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
 div.controls div.menu {

@@ -71,6 +71,15 @@
 			"NE": "Nordeste",
 			"SE": "Sudeste",
 			"S": "Sul"
+		},
+		"transmission_lines": {
+			"750": {"color": "black"},
+			"500": {"color": "red"},
+			"440": {"color": "purple"},
+			"345": {"color": "blue"},
+			"230": {"color": "green"},
+			"138": {"color": "orange"},
+			"88": {"color": "pink"}
 		}
 	}
 }

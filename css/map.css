@@ -15,6 +15,7 @@ div#map {
 .power-plant-icon.ufv {border: 1px solid orange;}
 .power-plant-icon.utn {border: 1px solid green;}
 
+
 .leaflet-popup ul {list-style-type: none;}
 .leaflet-popup ul li {margin: 4px 0;}
 .leaflet-popup ul li > i {margin-right: 8px;}

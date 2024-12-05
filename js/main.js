@@ -34,8 +34,12 @@ $('div#tech-toggle-ctrl button').click(function(e) {
 });
 
 $('li#left-menu-toggle-ctrl').click(() => {
-	$('div.controls div.middle-bar div.left-panel').slideToggle('linear');
+	$('div.controls div.middle-bar div.left-panel').fadeToggle(200);
 });
+
+$('li#main-plot-toggle-ctrl').click(() => {
+	$('div.controls div.middle-bar div.main-panel').fadeToggle(200);
+})
 
 
 window.onload = platform.load();

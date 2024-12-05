@@ -15,21 +15,23 @@
 <body>
 	<div class="controls">
 		<nav class="top-bar">
-			<div class="toggle multi-toggle" title="Tipo de geração." id="tech-toggle-ctrl">
-				<button value="EOL" class="active">EOL</button>
-				<button value="UFV" class="active">UFV</button>
-				<button value="UTN">UTN</button>
-				<button value="UHE">UHE</button>
-				<button value="CGH">CGH</button>
-				<button value="PCH">PCH</button>
-				<button value="UTE">UTE</button>
+			<div class="toggle multi-toggle" id="tech-toggle-ctrl">
+				<button value="EOL" title="Usinas eólicas.." class="active">EOL</button>
+				<button value="UFV" title="Usinas fotovoltáicas." class="active">UFV</button>
+				<button value="UTN" title="Usinas termonucleares.">UTN</button>
+				<button value="UHE" title="Usinas hidroelétricas.">UHE</button>
+				<button value="CGH" title="Centrais geradoras hidroelétricas.">CGH</button>
+				<button value="PCH" title="Pequenas centrais hidroelétricas.">PCH</button>
+				<button value="UTE" title="Usinas termoelétricas.">UTE</button>
+				<button value="MMGD" title="Microgeração distribuída." class="inactive">MMGD</button>
 			</div>
-			<div class="toggle" title="Camadas" id="level-toggle-ctrl">
-				<button value="subsystems" class="active">Subsistemas</button>
-				<button value="states">Estados</button>
+			<div class="toggle" id="level-toggle-ctrl">
+				<button value="subsystems" title="Formas dos subsistemas." class="active">Subsistemas</button>
+				<button value="states" title="Formas dos estados.">Estados</button>
 			 </div>
-			 <div class="toggle" title="Visualizar usinas individuais" id="points-toggle-ctrl">
-				<button value="point" class="active">Usinas</button>
+			 <div class="toggle" id="points-toggle-ctrl">
+				<button value="point" title="Mostrar usinas individuais." class="active">Usinas</button>
+				<button value="point" title="Mostrar conjuntos de usinas do ONS.">Conjuntos (ONS)</button>
 			</div>
 		</nav>
 		<div class="middle-bar">
@@ -37,6 +39,7 @@
 				<div class="menu">
 					<ul>
 						<li title="Barra lateral." id="left-menu-toggle-ctrl"><i class="fa-solid fa-bars"></i></li>
+						<li title="Gráfico principal." id="main-plot-toggle-ctrl"><i class="fa-solid fa-chart-line"></i></li>
 						<li title="Editar plataforma."><i class="fa-solid fa-pen-to-square"></i></li>
 					</ul>
 				</div>
@@ -57,14 +60,8 @@
 			<div class="main-panel">
 				<div class="container">
 					<div class="panel" id="select-view">
-						<div class="title"><h1>Sudeste</h1></div>
-						<div class="header">
-							<ul>
-								<li><i class="fa-solid fa-bolt"></i> 30,0 MWh</li>
-								<li><i class="fa-solid fa-map-location"></i> 23,9 S, 46,5 O</li>
-								<li><i class="fa-solid fa-hashtag"></i> EOL.RS.PE.000000-0.01</li>
-							</ul>
-						</div>
+						<div class="title"><h1>Sistema Interligado Nacional</h1></div>
+						<div class="header"></div>
 						<div class="content">
 							<div id="select-plot"></div>
 						</div>

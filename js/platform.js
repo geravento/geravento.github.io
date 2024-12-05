@@ -7,7 +7,7 @@ class Platform {
 
 	constructor() {
 		this.techs = ['EOL', 'UFV'];
-		this.level = 'subsystems';
+		this.level = null;
 
 		this.showPoints = true;
 		this.points = {};
@@ -130,9 +130,35 @@ class Platform {
 		}
 	}
 
+	loadTransmissionLines() {
+		fetch('data/transmission/DataRecords.geojson')
+		.then((response) => response.json())
+		.then((geoJsonData) => {
+			L.geoJSON(geoJsonData, {
+				style: (feature) => {
+					return {
+						color: this.config["shapes"]["transmission_lines"][feature.properties.VN]?.["color"] || '#3388ff',
+						weight: 2,
+						opacity: 1,
+						dashArray: new Date(feature.properties.DTENTRADA) <= Math.floor(Date.now() / 1000) ? '5, 5' : undefined
+					};
+				},
+				onEachFeature: (feature, layer) => {
+					layer.bindPopup(`
+						<h3>${feature.properties.NOMELONGO}</h3>
+						<p>${feature.properties.AGE_NOME}</p>
+					`);
+				}
+			})
+			.addTo(this.map);
+		})
+	}
+
 	loadInfo() {
 		this.loadPoints();
+
 		if (this.level) this.loadShapes();
+		this.loadTransmissionLines();
 	}
 
 	clearMarkers() {
