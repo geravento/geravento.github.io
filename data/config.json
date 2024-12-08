@@ -1,6 +1,6 @@
 {
 	"techs": {
-		"EOL": {
+		"UEE": {
 			"name": "eólica",
 			"color": "gray",
 			"icon": "img/points/eol.png"
@@ -18,16 +18,6 @@
 		"UHE": {
 			"name": "hidrelétrica",
 			"color": "blue",
-			"icon": "img/points/uhe.png"
-		},
-		"CGH": {
-			"name": "hidrelétrica",
-			"color": "cyan",
-			"icon": "img/points/uhe.png"
-		},
-		"PCH": {
-			"name": "hidrelétrica",
-			"color": "cyan",
 			"icon": "img/points/uhe.png"
 		},
 		"UTE": {

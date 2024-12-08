@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Plataforma para visualização dinâmica de ativos de geração centralizada eólica no Brasil.">
 	<meta name="google-site-verification" content="3Cpl3ozutCq60xxQtbaWprLJN7LjnHjYHBF-gkZYO9Q" />
-	<title>Geração Centralizada - GeraVento</title>
+	<title>Plataforma de Geração</title>
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/plot.css">
 	<link rel="stylesheet" href="css/map.css">
@@ -16,22 +16,19 @@
 	<div class="controls">
 		<nav class="top-bar">
 			<div class="toggle multi-toggle" id="tech-toggle-ctrl">
-				<button value="EOL" title="Usinas eólicas.." class="active">EOL</button>
+				<button value="UEE" title="Usinas eólicas.." class="active">UEE</button>
 				<button value="UFV" title="Usinas fotovoltáicas." class="active">UFV</button>
 				<button value="UTN" title="Usinas termonucleares.">UTN</button>
 				<button value="UHE" title="Usinas hidroelétricas.">UHE</button>
-				<button value="CGH" title="Centrais geradoras hidroelétricas.">CGH</button>
-				<button value="PCH" title="Pequenas centrais hidroelétricas.">PCH</button>
 				<button value="UTE" title="Usinas termoelétricas.">UTE</button>
-				<button value="MMGD" title="Microgeração distribuída." class="inactive">MMGD</button>
 			</div>
 			<div class="toggle" id="level-toggle-ctrl">
 				<button value="subsystems" title="Formas dos subsistemas." class="active">Subsistemas</button>
 				<button value="states" title="Formas dos estados.">Estados</button>
 			 </div>
 			 <div class="toggle" id="points-toggle-ctrl">
-				<button value="point" title="Mostrar usinas individuais." class="active">Usinas</button>
-				<button value="point" title="Mostrar conjuntos de usinas do ONS.">Conjuntos (ONS)</button>
+				<button value="groups" title="Mostrar conjuntos de usinas do ONS." class="active">Conjuntos (ONS)</button>
+				<button value="power-plants" title="Mostrar usinas individuais.">Usinas</button>
 			</div>
 		</nav>
 		<div class="middle-bar">

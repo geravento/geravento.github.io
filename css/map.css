@@ -11,7 +11,7 @@ div#map {
 	background-color: rgba(255, 255, 255, 0.1);
 	border-radius: 100%;
 }
-.power-plant-icon.eol {border: 1px solid white;}
+.power-plant-icon.uee {border: 1px solid white;}
 .power-plant-icon.ufv {border: 1px solid orange;}
 .power-plant-icon.utn {border: 1px solid green;}
 

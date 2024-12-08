@@ -7,15 +7,17 @@ import Platform from './platform.js';
 const platform = new Platform();
 
 $('div#points-toggle-ctrl button').click(function(e) {
-	platform.togglePoints();
-	$(this).toggleClass('active');
+	const pointLevel = platform.togglePointLevel($(this).val());
+
+	$('div#points-toggle-ctrl button').removeClass('active');
+	if (pointLevel) $(this).addClass('active');
 });
 
 $('div#level-toggle-ctrl button').click(function(e) {
-	const level = platform.toggleLevel($(this).val());
+	const shapeLevel = platform.toggleShapeLevel($(this).val());
 
 	$('div#level-toggle-ctrl button').removeClass('active');
-	if (level) $(this).addClass('active');
+	if (shapeLevel) $(this).addClass('active');
 });
 
 $('div#tech-toggle-ctrl button').click(function(e) {
